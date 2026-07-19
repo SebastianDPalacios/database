@@ -1,4 +1,4 @@
--- Editable POS ticket settings.
+﻿-- Editable POS ticket settings.
 -- Run after:
 --   052_customer_neighborhood.sql
 
@@ -35,6 +35,15 @@ VALUES (
     'showSeller', true,
     'showDeliveryDate', true,
     'customerTitle', 'CLIENTE',
+    'showCustomerName', true,
+    'showCustomerIdentification', true,
+    'showCustomerAddress', true,
+    'showCustomerNeighborhood', true,
+    'showCustomerPhone', true,
+    'customerIdentificationLabel', 'Identificacion',
+    'customerAddressLabel', 'Direccion',
+    'customerNeighborhoodLabel', 'Barrio/Zona',
+    'customerPhoneLabel', 'Tel',
     'detailTitle', 'DETALLE SOLICITADO',
     'policyTitle', 'POLITICA DE CAMBIOS',
     'policyText', 'Se realizan cambios por producto vencido, con moho, mojado o mal moldeado. La vigencia es de 15 dias desde la entrega. El inconveniente debe reportarse como maximo dentro de los 2 dias siguientes al vencimiento y requiere autorizacion del vendedor.',
@@ -44,6 +53,10 @@ VALUES (
     'headerFontSize', 24,
     'customerFontSize', 20,
     'customerContactFontSize', 16,
+    'customerIdentificationFontSize', 13,
+    'customerAddressFontSize', 16,
+    'customerNeighborhoodFontSize', 15,
+    'customerPhoneFontSize', 16,
     'productFontSize', 13,
     'quantityFontSize', 20,
     'totalFontSize', 17,
@@ -54,3 +67,4 @@ VALUES (
 )
 ON DUPLICATE KEY UPDATE
   setting_value_json = setting_value_json;
+
