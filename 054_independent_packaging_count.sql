@@ -301,7 +301,10 @@ BEGIN
   SELECT
     v_report_id, pbo.id, pbo.product_id,
     t.counted_quantity, t.packed_quantity, t.damaged_quantity, t.missing_quantity,
-    CASE WHEN t.damage_reason IN ('cut','packaging') THEN t.damage_reason ELSE NULL END,
+    CASE
+      WHEN t.damage_reason IN ('production','oven','cut','packaging') THEN t.damage_reason
+      ELSE NULL
+    END,
     CASE
       WHEN t.missing_reason IN ('count_difference','handling_loss','suspected_theft','other')
       THEN t.missing_reason
@@ -317,7 +320,10 @@ BEGIN
   )
   SELECT
     p_production_batch_id, pbo.id, pbo.product_id, p_packer_employee_id,
-    CASE WHEN t.damage_reason = 'cut' THEN 'cut' ELSE 'packaging' END,
+    CASE
+      WHEN t.damage_reason IN ('production','oven','cut','packaging') THEN t.damage_reason
+      ELSE 'packaging'
+    END,
     t.damaged_quantity, COALESCE(p_packed_date, CURRENT_DATE), t.notes, p_actor_user_id
   FROM tmp_packing_items t
   INNER JOIN production_batch_outputs pbo ON pbo.id = t.production_batch_output_id
